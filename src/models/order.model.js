@@ -42,6 +42,11 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     enum: ["COD", "VNPAY"],
   },
+  paymentStatus: {
+    type: String,
+    enum: ["pending", "paid", "failed"],
+    default: "pending",
+  },
   name: { type: String, required: true },
   phone: { type: String, required: true },
   shippingAddress: {
