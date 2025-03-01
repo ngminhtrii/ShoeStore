@@ -32,19 +32,27 @@ const OrderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  shippingFee: { type: Number },
   status: {
     type: String,
-    enum: ["Chờ xác nhận", "Đang giao", "Đã giao", "Đã hủy"],
-    default: "Chờ xác nhận",
+    default: "pending",
+    enum: ["pending", "confirmed", "shipping", "delivered", "cancelled"],
   },
   paymentMethod: {
     type: String,
-    enum: ["Momo", "ZaloPay"],
+    enum: ["COD", "VNPAY"],
   },
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
   shippingAddress: {
     type: String,
     required: true,
   },
+  note: {
+    type: String,
+    default: "",
+  },
+  discountCode: { type: mongoose.Schema.Types.ObjectId, ref: "Discount" },
 });
 
 OrderSchema.add(BaseSchema);

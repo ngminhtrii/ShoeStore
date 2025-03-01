@@ -9,7 +9,19 @@ const ProductSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  totalQuantity: {
+    type: Number,
+    default: 0,
+  },
   price: {
+    type: Number,
+    required: true,
+  },
+  costPrice: {
+    type: Number,
+    required: true,
+  },
+  profit: {
     type: Number,
     required: true,
   },
@@ -20,10 +32,6 @@ const ProductSchema = new mongoose.Schema({
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Brand",
-  },
-  size: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Size",
   },
   color: {
     type: [mongoose.Schema.Types.ObjectId],
@@ -49,6 +57,7 @@ const ProductSchema = new mongoose.Schema({
   ],
   images: {
     type: [String],
+    default: [],
   },
 });
 

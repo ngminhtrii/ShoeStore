@@ -18,10 +18,20 @@ const AuthSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+  },
+  dateOfBirth: {
+    type: Date,
+  },
   role: {
     type: String,
     enum: ["user", "admin"],
     default: "user",
+  },
+  image: {
+    type: String,
   },
   wishlist: [
     {
@@ -29,9 +39,7 @@ const AuthSchema = new mongoose.Schema({
       ref: "Product",
     },
   ],
-  image: {
-    type: String,
-  },
+  discounts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Discount" }],
 });
 
 AuthSchema.add(BaseSchema);

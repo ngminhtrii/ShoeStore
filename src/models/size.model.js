@@ -6,7 +6,7 @@ const SizeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  status: {
+  description: {
     type: String,
   },
 });
