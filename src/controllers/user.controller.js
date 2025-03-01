@@ -4,7 +4,7 @@ const {
   updateUser,
   deleteUser,
 } = require("../services/user.service");
-const User = require("../models/user.model");
+const User = require("../models/auth.model");
 
 const getUsers = async (req, res) => {
   try {
