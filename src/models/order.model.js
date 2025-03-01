@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
 const OrderSchema = new mongoose.Schema({
   userId: {
@@ -44,20 +45,9 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-OrderSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+OrderSchema.add(BaseSchema);
 
 const Order = mongoose.model("Order", OrderSchema);
 

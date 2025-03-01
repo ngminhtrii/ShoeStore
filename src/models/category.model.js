@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
 const CategorySchema = new mongoose.Schema({
   name: {
@@ -12,20 +13,12 @@ const CategorySchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
+  image: {
+    type: String,
   },
 });
 
-CategorySchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+CategorySchema.add(BaseSchema);
 
 const Category = mongoose.model("Category", CategorySchema);
 

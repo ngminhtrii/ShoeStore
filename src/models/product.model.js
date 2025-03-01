@@ -17,13 +17,16 @@ const ProductSchema = new mongoose.Schema({
     ref: "Category",
   },
   brand: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Brand",
   },
   size: {
-    type: [Number],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Size",
   },
   color: {
-    type: [String],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Color",
   },
   stock: {
     type: Number,

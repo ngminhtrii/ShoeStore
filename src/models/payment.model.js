@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
 const PaymentSchema = new mongoose.Schema({
   orderId: {
@@ -17,7 +18,7 @@ const PaymentSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ["Credit Card", "Momo", "ZaloPay"],
+    enum: ["Momo", "ZaloPay"],
     required: true,
   },
   status: {
@@ -29,16 +30,9 @@ const PaymentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-PaymentSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+PaymentSchema.add(BaseSchema);
 
 const Payment = mongoose.model("Payment", PaymentSchema);
 

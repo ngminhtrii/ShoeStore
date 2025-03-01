@@ -1,34 +1,63 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
-const ReviewSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+const ProductSchema = new mongoose.Schema({
+  name: {
+    type: String,
     required: true,
   },
-  productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
-    required: true,
+  description: {
+    type: String,
   },
-  rating: {
+  price: {
     type: Number,
     required: true,
   },
-  comment: {
-    type: String,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  brand: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Brand",
+  },
+  size: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Size",
+  },
+  color: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Color",
+  },
+  stock: {
+    type: Number,
+    default: 0,
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  reviews: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      comment: {
+        type: String,
+      },
+      rating: {
+        type: Number,
+      },
+    },
+  ],
+  images: {
+    type: [String],
   },
 });
 
-ReviewSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+ProductSchema.add(BaseSchema);
 
-const Review = mongoose.model("Review", ReviewSchema);
+const Product = mongoose.model("Product", ProductSchema);
 
-module.exports = Review;
+module.exports = Product;

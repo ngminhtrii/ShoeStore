@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
-const UserSchema = new mongoose.Schema({
+const AuthSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -17,9 +18,6 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
-  address: {
-    type: String,
-  },
   role: {
     type: String,
     enum: ["user", "admin"],
@@ -31,21 +29,13 @@ const UserSchema = new mongoose.Schema({
       ref: "Product",
     },
   ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
+  image: {
+    type: String,
   },
 });
 
-UserSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+AuthSchema.add(BaseSchema);
 
-const User = mongoose.model("User", UserSchema);
+const Auth = mongoose.model("Auth", AuthSchema);
 
-module.exports = User;
+module.exports = Auth;

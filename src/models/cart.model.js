@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
 const CartSchema = new mongoose.Schema({
   userId: {
@@ -23,20 +24,9 @@ const CartSchema = new mongoose.Schema({
       },
     },
   ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-CartSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+CartSchema.add(BaseSchema);
 
 const Cart = mongoose.model("Cart", CartSchema);
 
