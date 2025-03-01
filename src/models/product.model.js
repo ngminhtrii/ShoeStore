@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const BaseSchema = require("./base.model");
 
 const ProductSchema = new mongoose.Schema({
   name: {
@@ -28,10 +29,6 @@ const ProductSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: "Color",
   },
-  stock: {
-    type: Number,
-    default: 0,
-  },
   rating: {
     type: Number,
     default: 0,
@@ -53,20 +50,9 @@ const ProductSchema = new mongoose.Schema({
   images: {
     type: [String],
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-ProductSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
+ProductSchema.add(BaseSchema);
 
 const Product = mongoose.model("Product", ProductSchema);
 
