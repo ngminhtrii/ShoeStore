@@ -39,7 +39,7 @@ const OrderSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ["Credit Card", "Momo", "ZaloPay"],
+    enum: ["Momo", "ZaloPay"],
   },
   shippingAddress: {
     type: String,
